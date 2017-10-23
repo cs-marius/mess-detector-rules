@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<!--
+  ~ @author Marius M.
+  -->
+<ruleset name="My first PHPMD rule set" xmlns="http://pmd.sf.net/ruleset/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sf.net/ruleset/1.0.0"
+         xsi:noNamespaceSchemaLocation="http://pmd.sf.net/ruleset_xml_schema.xsd">
+    <description>
+        Php mess detect custom ruleset
+    </description>
+    <!-- 1-4 low complexity, 5-7 moderate complexity, 8-10 high complexity, 11+ very high complexity. -->
+    <rule ref="rulesets/codesize.xml/CyclomaticComplexity">
+        <priority>1</priority>
+        <properties>
+            <property name="reportLevel" value="7" description="Cyclomatic complexity threshold"/>
+        </properties>
+    </rule>
+    <!-- Excessive number for child classes is an indicator for an unbalanced class hierarchy -->
+    <rule ref="rulesets/design.xml/NumberOfChildren">
+        <priority>2</priority>
+        <properties>
+            <property name="minimum" value="5" description="Maximum number of acceptable child classes." />
+        </properties>
+    </rule>
+    <!-- Too many parents indicates unbalanced and wrong class inheritance -->
+    <rule ref="rulesets/design.xml/DepthOfInheritance">
+        <priority>2</priority>
+        <properties>
+            <property name="minimum" value="5" description="Maximum number of acceptable parent classes." />
+        </properties>
+    </rule>
+    <!-- Too many dependencies has negative impact on several quality aspects of a class -->
+    <rule ref="rulesets/design.xml/CouplingBetweenObjects">
+        <priority>2</priority>
+        <properties>
+            <property name="minimum" value="13" description="Maximum number of acceptable dependencies." />
+        </properties>
+    </rule>
+    <!-- Check for debugging leftovers -->
+    <rule ref="rulesets/design.xml/DevelopmentCodeFragment">
+        <priority>2</priority>
+        <properties>
+            <property name="unwanted-functions" value="var_dump,print_r,debug_zval_dump,debug_print_backtrace" description="Comma separated list of functions." />
+        </properties>
+    </rule>
+    <!-- Too many methods breaks the single responsibility; It does too much -->
+    <rule ref="rulesets/codesize.xml/TooManyMethods">
+        <priority>3</priority>
+        <properties>
+            <property name="maxmethods" description="Method count reporting threshold" value="20"/>
+            <!-- ignore setters and getters from max methods -->
+            <property name="ignorepattern" description="Ignore methods matching this regex" value="(^(set|get))i"/>
+        </properties>
+    </rule>
+    <!-- A large number of methods also means that this class has a greater potential impact on derived classes. -->
+    <rule ref="rulesets/codesize.xml/ExcessiveClassComplexity">
+        <priority>3</priority>
+        <properties>
+            <property name="maximum" description="The maximum WMC tolerable for a class." value="50"/>
+        </properties>
+    </rule>
+    <!-- Import the entire unused code rule set -->
+    <rule ref="rulesets/unusedcode.xml/UnusedPrivateField" />
+    <!-- Goto makes code harder to read and it is nearly impossible to understand the control flow -->
+    <rule ref="rulesets/design.xml/GotoStatement"/>
+    <!-- Exit expression checking -->
+    <rule ref="rulesets/design.xml/ExitExpression"/>
+    <!-- Eval expression checking -->
+    <rule ref="rulesets/design.xml/EvalExpression"/>
+</ruleset>

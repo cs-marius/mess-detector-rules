@@ -1,0 +1,17 @@
+{
+  "name": "cs-marius/mess-detector-rules",
+  "description": "A set of mess detector rules and sniffs for php.",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Marius M.",
+      "role": "Maintainer"
+    }
+  ],
+  "require": {
+    "php": ">=5.4.0",
+    "phpmd/phpmd" : "@stable"
+  }
+}
+
+
